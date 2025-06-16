@@ -6,7 +6,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/jackc/pgx/v5/pgxpool"
-	_ "github.com/jackc/pgx/v5/stdlib" // Register pgx driver for database/sql
+	"github.com/jackc/pgx/v5/stdlib" // Import pgx driver for database/sql
 	"github.com/pressly/goose/v3"
 	"log"
 	"todo-list-backend/internal/config"
@@ -17,7 +17,7 @@ import (
 
 func SetupRouter(cfg *config.Config) *chi.Mux {
 	// Initialize SQL database connection for Goose
-	db, err := sql.Open("postgres", cfg.Database.URL)
+	db, err := sql.Open("pgx", cfg.Database.URL)
 	if err != nil {
 		panic("Failed to connect to database for migrations: " + err.Error())
 	}
